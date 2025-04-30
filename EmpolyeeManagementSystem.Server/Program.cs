@@ -19,6 +19,17 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAll", builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    });
+
 }
 
 
@@ -35,6 +46,9 @@ var app = builder.Build();
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
+
+    app.UseCors("AllowAll");
+
 
     app.MapControllers();
 
