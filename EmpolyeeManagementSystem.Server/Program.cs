@@ -1,30 +1,44 @@
+using EMS.API.Data;
+using EMS.API.Repositories.Abstract;
+using EMS.API.Repositories.Implementation;
+using EMS.API.Services.Abstract;
+using EMS.API.Services.Implementation;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                            ?? throw new InvalidOperationException("No Connection String was found");
+
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+    builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
 }
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+var app = builder.Build();
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
 
-app.MapControllers();
+    if (app.Environment.IsDevelopment())
+        app.UseSwagger()
+           .UseSwaggerUI();
 
-app.MapFallbackToFile("/index.html");
 
-app.Run();
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.MapFallbackToFile("/index.html");
+
+    app.Run();
+}
