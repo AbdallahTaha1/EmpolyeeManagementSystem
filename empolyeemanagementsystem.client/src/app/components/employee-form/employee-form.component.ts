@@ -59,4 +59,9 @@ export class EmployeeFormComponent implements OnInit {
 
     request.subscribe(() => this.router.navigate(['/']));
   }
+
+  // convenience getter for easy access in template
+  get f() {
+    return this.employeeForm.controls;
+  }
 }

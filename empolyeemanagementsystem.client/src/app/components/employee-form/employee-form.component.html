@@ -1,27 +1,71 @@
 <div class="container mt-5">
   <h2>{{ isEditMode ? "Edit" : "Create" }} Employee</h2>
 
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="mt-4">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="mb-3">
-      <label class="form-label">First Name</label>
-      <input class="form-control" formControlName="firstName" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Last Name</label>
-      <input class="form-control" formControlName="lastName" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" formControlName="email" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Position</label>
-      <input class="form-control" formControlName="position" />
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" />
+      <div
+        class="text-danger"
+        *ngIf="f['firstName'].touched && f['firstName'].invalid"
+      >
+        <small *ngIf="f['firstName'].errors?.['required']"
+          >First Name is required.</small
+        >
+        <small *ngIf="f['firstName'].errors?.['minlength']"
+          >Minimum 2 characters required.</small
+        >
+      </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">
+    <div class="mb-3">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" />
+      <div
+        class="text-danger"
+        *ngIf="f['lastName'].touched && f['lastName'].invalid"
+      >
+        <small *ngIf="f['lastName'].errors?.['required']">
+          Last Name is required.
+        </small>
+        <small *ngIf="f['lastName'].errors?.['minlength']">
+          Minimum 2 characters required.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+      <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
+        <small *ngIf="f['email'].errors?.['required']">
+          Email is required.
+        </small>
+        <small *ngIf="f['email'].errors?.['email']">
+          Enter a valid email address.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Position</label>
+      <input type="text" class="form-control" formControlName="position" />
+      <div
+        class="text-danger"
+        *ngIf="f['position'].touched && f['position'].invalid"
+      >
+        <small *ngIf="f['position'].errors?.['required']">
+          Position is required.
+        </small>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="employeeForm.invalid"
+    >
       {{ isEditMode ? "Update" : "Create" }}
     </button>
-    <a class="btn btn-secondary ms-2" routerLink="/">Cancel</a>
   </form>
 </div>

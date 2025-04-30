@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: EmployeeListComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     BrowserModule,
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   exports: [RouterModule],
 })
