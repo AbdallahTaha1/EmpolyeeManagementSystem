@@ -5,9 +5,12 @@ import { AppModule } from './app.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 
 const routes: Routes = [
-  { path: '', component: EmployeeListComponent }, // Redirect to the employee list component
+  { path: '', component: EmployeeListComponent },
+  { path: 'create', component: EmployeeFormComponent },
+  { path: 'edit/:id', component: EmployeeFormComponent },
 ];
 
 @NgModule({

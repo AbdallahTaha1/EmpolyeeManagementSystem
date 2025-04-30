@@ -1,1 +1,27 @@
-<p>employee-form works!</p>
+<div class="container mt-5">
+  <h2>{{ isEditMode ? "Edit" : "Create" }} Employee</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="mt-4">
+    <div class="mb-3">
+      <label class="form-label">First Name</label>
+      <input class="form-control" formControlName="firstName" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Last Name</label>
+      <input class="form-control" formControlName="lastName" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Position</label>
+      <input class="form-control" formControlName="position" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+      {{ isEditMode ? "Update" : "Create" }}
+    </button>
+    <a class="btn btn-secondary ms-2" routerLink="/">Cancel</a>
+  </form>
+</div>

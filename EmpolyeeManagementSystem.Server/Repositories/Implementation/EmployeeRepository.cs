@@ -14,9 +14,16 @@ namespace EMS.API.Repositories.Implementation
             _context = context;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllAsync() => await _context.Employees.ToListAsync();
+        public async Task<IEnumerable<Employee>> GetAllAsync() =>
+            await _context.Employees
+                           .AsNoTracking()
+                           .ToListAsync();
 
-        public async Task<Employee?> GetByIdAsync(int id) => await _context.Employees.FindAsync(id);
+        public async Task<Employee?> GetByIdAsync(int id) =>
+            await _context.Employees
+                      .AsNoTracking()
+                      .FirstOrDefaultAsync(e => e.Id == id);
+
 
         public async Task<Employee> AddAsync(Employee employee)
         {
