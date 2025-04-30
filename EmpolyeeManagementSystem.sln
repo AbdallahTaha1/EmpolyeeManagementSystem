@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMS.API", "EmpolyeeManagementSystem.Server\EMS.API.csproj", "{02266229-A54F-4CE5-9278-091846E84116}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EMS.Client", "empolyeemanagementsystem.client\EMS.Client.esproj", "{4044E965-2D8A-4F07-8B30-E7FB49788A36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02266229-A54F-4CE5-9278-091846E84116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02266229-A54F-4CE5-9278-091846E84116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02266229-A54F-4CE5-9278-091846E84116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02266229-A54F-4CE5-9278-091846E84116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4044E965-2D8A-4F07-8B30-E7FB49788A36}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDAB75CE-B4CB-4214-902E-F7F208FA544F}
+	EndGlobalSection
+EndGlobal
