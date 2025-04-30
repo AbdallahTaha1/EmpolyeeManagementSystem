@@ -1,4 +1,5 @@
 ﻿using EMS.API.Data;
+using EMS.API.DTOs;
 using EMS.API.Models;
 using EMS.API.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,14 @@ namespace EMS.API.Repositories.Implementation
             await _context.Employees
                            .AsNoTracking()
                            .ToListAsync();
+
+        public async Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumber, int pageSize) =>
+            await PaginatedList<Employee>.CreateAsync(
+                _context.Employees,
+                pageNumber,
+                pageSize
+            );
+
 
         public async Task<Employee?> GetByIdAsync(int id) =>
             await _context.Employees

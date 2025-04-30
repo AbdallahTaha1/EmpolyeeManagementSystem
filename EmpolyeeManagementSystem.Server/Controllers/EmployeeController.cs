@@ -1,4 +1,5 @@
-﻿using EMS.API.Models;
+﻿using EMS.API.DTOs;
+using EMS.API.Models;
 using EMS.API.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,13 @@ namespace EMS.API.Controllers
         {
             var employees = await _employeeService.GetAllAsync();
             return Ok(employees);
+        }
+
+        [HttpGet("paged")]
+        public async Task<ActionResult<PaginatedList<Employee>>> GetPaged([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var pagedResult = await _employeeService.GetPaginatedListAsync(pageNumber, pageSize);
+            return Ok(pagedResult);
         }
 
         [HttpGet("{id}")]

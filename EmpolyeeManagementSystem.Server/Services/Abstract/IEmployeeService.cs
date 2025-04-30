@@ -1,4 +1,5 @@
-﻿using EMS.API.Models;
+﻿using EMS.API.DTOs;
+using EMS.API.Models;
 
 namespace EMS.API.Services.Abstract
 {
@@ -9,5 +10,6 @@ namespace EMS.API.Services.Abstract
         Task<Employee> CreateAsync(Employee employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(int id);
+        Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumer, int pageSize);
     }
 }
