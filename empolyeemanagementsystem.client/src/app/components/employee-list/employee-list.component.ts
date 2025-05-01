@@ -13,6 +13,10 @@ import { Employee } from '../../models/employee.model';
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
+  currentPage = 1;
+  totalPages = 1;
+  hasPreviousPage = false;
+  hasNextPage = false;
 
   constructor(
     private employeeService: EmployeeService,
@@ -23,9 +27,15 @@ export class EmployeeListComponent implements OnInit {
     this.loadEmployees();
   }
 
-  loadEmployees(): void {
-    this.employeeService.getAll().subscribe({
-      next: (data) => (this.employees = data),
+  loadEmployees(page: number = 1): void {
+    this.employeeService.getPaged(page, 4).subscribe({
+      next: (data) => {
+        this.employees = data.items;
+        this.currentPage = data.currentPage;
+        this.totalPages = data.totalPages;
+        this.hasPreviousPage = data.hasPreviousPage;
+        this.hasNextPage = data.hasNextPage;
+      },
       error: (err) => console.error(err),
     });
   }
@@ -40,5 +50,9 @@ export class EmployeeListComponent implements OnInit {
 
   onEdit(id: number): void {
     this.router.navigate(['/edit', id]);
+  }
+
+  goToPage(page: number): void {
+    this.loadEmployees(page);
   }
 }
