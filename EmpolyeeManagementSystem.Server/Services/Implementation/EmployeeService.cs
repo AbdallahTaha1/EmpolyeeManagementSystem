@@ -19,8 +19,8 @@ namespace EMS.API.Services.Implementation
         public async Task<Employee?> GetByIdAsync(int id) =>
              await _employeeRepository.GetByIdAsync(id);
 
-        public async Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumer, int pageSize) =>
-            await _employeeRepository.GetPaginatedListAsync(pageNumer, pageSize);
+        public async Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumer, int pageSize, string? searchTerm) =>
+            await _employeeRepository.GetPaginatedListAsync(pageNumer, pageSize, searchTerm);
 
         public async Task<Employee> CreateAsync(Employee employee)
         {

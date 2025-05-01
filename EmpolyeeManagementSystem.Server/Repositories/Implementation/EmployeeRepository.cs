@@ -20,13 +20,21 @@ namespace EMS.API.Repositories.Implementation
                            .AsNoTracking()
                            .ToListAsync();
 
-        public async Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumber, int pageSize) =>
-            await PaginatedList<Employee>.CreateAsync(
-                _context.Employees,
+        public async Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumber, int pageSize, string? searchTerm)
+        {
+            var query = _context.Employees.AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+                query = query.Where(e => e.FirstName.Contains(searchTerm) || e.LastName.Contains(searchTerm));
+
+            return await PaginatedList<Employee>.CreateAsync(
+                query,
                 pageNumber,
                 pageSize
             );
 
+
+        }
 
         public async Task<Employee?> GetByIdAsync(int id) =>
             await _context.Employees

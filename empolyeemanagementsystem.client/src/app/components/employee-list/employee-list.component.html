@@ -1,54 +1,70 @@
 <div class="container mt-5">
-  <div class="d-flex justify-content-between mb-3">
-    <h2>Employee List</h2>
-    <a routerLink="/create" class="btn btn-primary">Add Employee</a>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+      <h2>Employee List</h2>
+      <div class="d-flex">
+        <input
+          type="text"
+          class="form-control me-2"
+          placeholder="Search by name..."
+          [(ngModel)]="searchTerm"
+        />
+        <button class="btn btn-outline-primary" (click)="onSearch()">
+          Search
+        </button>
+      </div>
+      <a routerLink="/create" class="btn btn-primary ms-2">Add Employee</a>
+    </div>
+
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Position</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.firstName }} {{ emp.lastName }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.position }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-warning me-2"
+              (click)="onEdit(emp.id)"
+            >
+              Edit
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="onDelete(emp.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav *ngIf="totalPages > 1">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="!hasPreviousPage">
+          <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+
+        <li
+          class="page-item"
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.active]="i + 1 === currentPage"
+        >
+          <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+
+        <li class="page-item" [class.disabled]="!hasNextPage">
+          <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
-
-  <table class="table table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Position</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let emp of employees">
-        <td>{{ emp.id }}</td>
-        <td>{{ emp.firstName }} {{ emp.lastName }}</td>
-        <td>{{ emp.email }}</td>
-        <td>{{ emp.position }}</td>
-        <td>
-          <button class="btn btn-sm btn-warning me-2" (click)="onEdit(emp.id)">
-            Edit
-          </button>
-          <button class="btn btn-sm btn-danger" (click)="onDelete(emp.id)">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <nav *ngIf="totalPages > 1">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="!hasPreviousPage">
-        <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
-      </li>
-
-      <li
-        class="page-item"
-        *ngFor="let page of [].constructor(totalPages); let i = index"
-        [class.active]="i + 1 === currentPage"
-      >
-        <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
-      </li>
-
-      <li class="page-item" [class.disabled]="!hasNextPage">
-        <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
-      </li>
-    </ul>
-  </nav>
 </div>

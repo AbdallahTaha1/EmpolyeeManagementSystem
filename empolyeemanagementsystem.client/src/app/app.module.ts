@@ -9,7 +9,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeFormComponent],
+  declarations: [AppComponent, EmployeeFormComponent, EmployeeListComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

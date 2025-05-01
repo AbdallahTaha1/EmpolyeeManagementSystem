@@ -15,10 +15,18 @@ export class EmployeeService {
     return this.http.get<Employee[]>(this.apiUrl);
   }
 
-  getPaged(page: number, pageSize: number): Observable<any> {
-    return this.http.get(
-      `${this.apiUrl}/paged?pageNumber=${page}&pageSize=${pageSize}`
-    );
+  getPaged(
+    page: number,
+    pageSize: number,
+    searchTerm: string = ''
+  ): Observable<any> {
+    return this.http.get(`${this.apiUrl}/paged`, {
+      params: {
+        pageNumber: page,
+        pageSize: pageSize,
+        searchTerm: searchTerm,
+      },
+    });
   }
 
   getById(id: number): Observable<Employee> {

@@ -10,6 +10,6 @@ namespace EMS.API.Services.Abstract
         Task<Employee> CreateAsync(Employee employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(int id);
-        Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumer, int pageSize);
+        Task<PaginatedList<Employee>> GetPaginatedListAsync(int pageNumer, int pageSize, string? searchTerm);
     }
 }

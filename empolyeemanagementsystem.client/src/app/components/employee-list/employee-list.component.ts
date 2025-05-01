@@ -6,8 +6,7 @@ import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-employee-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  standalone: false,
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
 })
@@ -17,6 +16,7 @@ export class EmployeeListComponent implements OnInit {
   totalPages = 1;
   hasPreviousPage = false;
   hasNextPage = false;
+  searchTerm = '';
 
   constructor(
     private employeeService: EmployeeService,
@@ -28,7 +28,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadEmployees(page: number = 1): void {
-    this.employeeService.getPaged(page, 4).subscribe({
+    this.employeeService.getPaged(page, 4, this.searchTerm).subscribe({
       next: (data) => {
         this.employees = data.items;
         this.currentPage = data.currentPage;
@@ -38,6 +38,11 @@ export class EmployeeListComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  onSearch(): void {
+    this.currentPage = 1;
+    this.loadEmployees();
   }
 
   onDelete(id: number): void {

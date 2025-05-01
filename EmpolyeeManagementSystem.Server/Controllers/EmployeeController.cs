@@ -24,9 +24,9 @@ namespace EMS.API.Controllers
         }
 
         [HttpGet("paged")]
-        public async Task<ActionResult<PaginatedList<Employee>>> GetPaged([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<PaginatedList<Employee>>> GetPaged([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, [FromQuery] string? searchTerm = null)
         {
-            var pagedResult = await _employeeService.GetPaginatedListAsync(pageNumber, pageSize);
+            var pagedResult = await _employeeService.GetPaginatedListAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
             return Ok(pagedResult);
         }
 
